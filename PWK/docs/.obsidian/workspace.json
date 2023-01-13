@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "COMMAND-LINE-FUN.md",
+                "file": "Getting-Comfortable-with-Kali-Linux.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "COMMAND-LINE-FUN.md",
+                "file": "Getting-Comfortable-with-Kali-Linux.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "COMMAND-LINE-FUN.md",
+                "file": "Getting-Comfortable-with-Kali-Linux.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "COMMAND-LINE-FUN.md"
+                "file": "Getting-Comfortable-with-Kali-Linux.md"
               }
             }
           }
@@ -148,8 +148,9 @@
   },
   "active": "27650948ff25068f",
   "lastOpenFiles": [
-    "Getting-Comfortable-with-Kali-Linux.md",
+    "Command-Line-Fun.md",
     "COMMAND-LINE-FUN.md",
+    "Getting-Comfortable-with-Kali-Linux.md",
     "Getting Comfortable with Kali Linux.md"
   ]
 }

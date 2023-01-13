@@ -1,4 +1,4 @@
-# 0 - Getting Comfortable with Kali Linux
+# Getting Comfortable with Kali Linux
 + Kali Linux is developed by offensive security and has many tools for security purposes
 
 

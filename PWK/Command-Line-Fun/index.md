@@ -1,4 +1,4 @@
-# 0 - COMMAND LINE FUN
+# COMMAND LINE FUN
 + Introduction to Kali Linux most popular and common commands
 
 # 1 - THE BASH ENVIRONMENT

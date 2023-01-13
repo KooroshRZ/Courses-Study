@@ -7,7 +7,6 @@
 ## 1.1 - ENVIRONMENT VARIABLES
 + A new environment is initialized when opening new bash treminal
 + environment data is stored on ENVIRONMENT VARIABLES
-
 ```bash
 $PATH : directories which bash searches in for commands
 echo $PATH
@@ -22,7 +21,6 @@ env # Show all environment varialbes
 
 ## 1.2 - TAB COMPLETION
 + Bash auto complete commands with `TAB` Key
-
 ```bash
 ls D<tab>
 Downloads/ Desktop/ Documents/
@@ -41,7 +39,6 @@ Desktop/
 + arrow key up moves backward in history
 + arrow ket down moves forward in history
 + `CTRL + R` searchs in commands and fins suitable one
-
 ```bash
 history # Show history commands
 !<number> # Run command with the number associated
@@ -88,7 +85,6 @@ cat filename.txt | wc -c > count.txt
 
 ## 3.1 - GREP
 + Search for text i output and print matches
-
 ```bash
 ls -la /usr/bin | grep zip # Print lines which hash zip in it
 grep -i # Case insensitive
@@ -97,7 +93,6 @@ grep -r # Search Recursively
 
 ## 3.2 - SED
 + Text editing on a stream of text
-
 ```bash
 echo "Try hard" | sed 's/hard/harder' # Replace harder with harder s means replace
 "Try harder"
@@ -105,7 +100,6 @@ echo "Try hard" | sed 's/hard/harder' # Replace harder with harder s means repla
 
 ## 3.3 - CUT
 + Extract section of text and print it
-
 ```bash
 echo 'a,b,c,d' | cut -d ',' -f 2 # Split text by ',' and prints second element
 b
@@ -117,7 +111,6 @@ cut -d ":" -f 1 /etc/passwd
 ## 3.4 - AWK
 + A programming language designed for text proccessing and data extraction
 + cut only can accept one character field seperator but awk is more flexible
-
 ```bash
 echo "aaaa::bbbb::cccc" | awk -F "::" '{print $1 $3}' # -F is field seperator and print $1 $3 extract first and third field
 aaaa cccc
@@ -140,7 +133,6 @@ cat access.log | grep <IP> | grep '/admin' | sort -u
 
 ## 4.1 - NANO
 + Simple and fast learning text editor
-
 ```bash
 nano <file name>
 
@@ -153,7 +145,6 @@ CTRL + x # Exit the file
 
 ## 4.2 - VI
 + Complex but powerful text editor
-
 ```bash
 vi <file name>
 
@@ -174,7 +165,6 @@ x in command mode # Delete current character
 
 ## 5.1 - COMM
 + Compares two files and print uniq and common lines
-
 ```bash
 comm file1 file2 # Print unique lines in file1 in first collumn, uniqe lines inf file2 in second column and common files in third column
 comm -12 file1 file2 # Print common lines since we suppressed columns 1,2
@@ -183,7 +173,6 @@ comm -12 file1 file2 # Print common lines since we suppressed columns 1,2
 ## 5.2 - DIFF
 + like COMM prints different lines wut is more complex
 + Two most popular formats, context and unified
-
 ```bash
 diff -c file1 file2 # Display result in context format 
 # - indicates lines in first file not in the second
@@ -195,7 +184,6 @@ diff -u file1 file2 # Display result in unified format
 
 ## 5.3 - VIMDIFF
 + combinations of vim and diif (opens two files and shows differences visually)
-
 ```bash
 vimdiff file1 file2
 CTRL + W + arrow key # Switch between windows
@@ -210,7 +198,6 @@ d + p # Get change from current windows and put it in other one
 + Linux kernel manages multi-tasking through use of processes
 + Each process is assgined a number called process ID (PID)
 + Linux also introduce concept of jobs 
-
 ```bash
 cat file | wc -c # Two processes but one job
 ```
@@ -218,18 +205,15 @@ cat file | wc -c # Two processes but one job
 ## 6.1 - BACKGROUNDING PROCESSES (BG)
 + Sometimes it is needed to send processes to background and gain control later
 1. We can do it by putting `&` at the end of our command
-
 ```bash
 ping -c 400 localhost > ping_results.txt &
 ```
 2. We can suspend and stop execution of current foreground command with `CTRL + Z`
-
 ```bash
 ping -c 400 localhost > ping_results.txt
 CTRL+Z
 ```
 3. We can resume previous suspended command with `bg` command
-
 ```bash
 bg # Runs and resume job in background
 ```
@@ -237,7 +221,6 @@ bg # Runs and resume job in background
 ## 6.2 - JOBS CONTROL: JOBS AND FG
 + builtin jobs utility list jobs in current terminal session
 + Specific jobs can be resumed by their PID or command name
-
 ```bash
 jobs # List jobs in current terminal session
 fg %1 # Resume job number 1 and returns it in foreground
@@ -247,7 +230,6 @@ fg # Resume only one job and returns it in foreground
 ## 6.3 - PROCESS CONTROL: PS AND KILL
 + ps which stands for process status
 + ps list processes wide not for curernt terminal
-
 ```bash
 ps -ef
 # -e displays all processes -f List all format listing
@@ -256,7 +238,6 @@ ps -fC <command name>
 # -C command name
 ```
 + We can stop a process by `kill` command and require PID
-
 ```bash
 kill <PID>
 ```
@@ -267,7 +248,6 @@ kill <PID>
 
 ## 7.1 - TAIL
 + Monitor log files entry as they are being written
-
 ```bash
 sudo tail -f /var/log/apache2/access.log
 # -f continuously update the tail output in real time
@@ -278,7 +258,6 @@ tail -nx filename # Prints last x lines of the file
 ## 7.2 - WATCH
 + Watch command is used to run specific commands repeatedly in specific period of time
 + By default it's preiod is 2 seconds but we can change it
-
 ```bash
 watch -n <seconds> <command> # Runthe specified <command> in every <n> seconds
 # Use CTRL + C to exit it and return to the terminal
@@ -289,7 +268,6 @@ watch -n <seconds> <command> # Runthe specified <command> in every <n> seconds
 
 ## 8.1 - WGET
 + Downloads files using HTTP and FTP protocol
-
 ```bash
 wget -O filename <URL LINK> # Downloads file from URL and saves it in different name by -O (capital case o) option
 ```
@@ -297,14 +275,12 @@ wget -O filename <URL LINK> # Downloads file from URL and saves it in different 
 ## 8.2 - CURL
 + A tools to transfer data to or from a server using a host of protocols
 + Download or Upload files
-
 ```bash
 curl -o filename <URL LINK> # Downloads file from URL and saves it in different name by -o (lower case o) option
 ```
 
 ## 8.3 - AXEL
 + A download accelerator which transfer file through http or ftp protocol with multiple connections
-
 ```bash
 axel -a -n 20 -o filename <LINK>
 # -a shows all progress during download
@@ -316,7 +292,6 @@ axel -a -n 20 -o filename <LINK>
 
 ## 9.1 - BASH HISTORY CUSTOMIZATION
 + `HISTCONTROL` environment variable defines whether or not removes duplicate commands
-
 ```bash
 export HISTCONTROL=ignoredups # Remove duplicate variables
 export HISTCONTROL=ignorespace # Remove commands start with space
@@ -331,7 +306,6 @@ export HISTTIMEFORMAT='%F %T ' # Show date and 24 hour format clock
 
 ## 9.2 - ALIAS
 + An string defined to use as specific command with shorter name
-
 ```bash
 alias lsa = 'ls -la' # When we enter lsa it will execute 'ls -la'
 ```
@@ -340,6 +314,8 @@ alias lsa = 'ls -la' # When we enter lsa it will execute 'ls -la'
 + The behaviour of interactive shell bash is in `/etc/bash.bashrc`
 + system wide bash settings can be changed by editing `.bashrc` located in every user's home directory
 + We can put `alias` in `.bashrc` or other commands to be executed every time a bash promt 
+```bash
 
+```
 
 # 10 - WRAPPING UP

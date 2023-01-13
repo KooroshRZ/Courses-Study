@@ -4,12 +4,10 @@
 
 # 1 - BOOTING UP KALI LINUX
 + Boot on VM and Change default password
-
 ```bash
 passwd
 ```
 + Don't use root user (use sudo instead)
-
 ```
 sudo command
 ```
@@ -39,25 +37,21 @@ sudo command
 
 ## 4-2 BASIC LINUX COMMANDS
 + **man pages** (formal piece of documentation about commands)
-
 ```bash
 man passwd
 ```
 
 + search man pages with keyword
-
 ```bash
 man -k passwd 
 ```
 
 + **apropos** (description-based search)
-
 ```bash
 apropos partition # Search commands which have partition in their description
 ```
 
 + **Listing files**
-
 ```bash
 ls # List files
 ls *.* ?.? # List files based on wildcard
@@ -66,7 +60,6 @@ ls -a1 # List all files in single line (automation)
 
 
 + **Moving around**
-
 ```bash
 cd directory # Change directory to specified directory
 pwd # show current directory
@@ -74,7 +67,6 @@ cd ~ # change to home directory
 ```
 
 + **Creating directories**
-
 ```bash
 mkdir # Create Directory
 mkdir a b # Create to directories names a,b
@@ -102,8 +94,7 @@ sudo systemctl enable ssh # Starts SSH on boot time
 ```
 
 ## 5-2 HTTP SERVICE
-+ Used for hosting files for downloading
-
+Used for hosting files for downloading
 ```bash
 sudo systemctl start apache2 # Starts Apache Service
 sudo ss -alnpt | grep sshd # Verify Apache service is up and running
@@ -117,14 +108,12 @@ Explore package tools, Not all tools can be installed by default
 ## 6.1 - APT UPDATE
 + Information cached locally
 + update the list of repositories
-
 ```bash
 sudo apt update # update list of repositories
 ```
 
 ## 6.2 - APT UPGRADE
 + after updadint APT db we can use it t upgrade packages
-
 ```bash
 sudo apt upgrade <package name> # Upgrade single packege with name
 sudo apt upgrade # Upgrade entire OS but better to take snapshot before upgrading
@@ -151,7 +140,6 @@ sudo apt remove --purge <package name> # Completely remove all package data incl
 + Core tool to install a package either directly or indirectly through `APT`
 + used offline no internet conneciton needed
 + It does not install dependent packages
-
 ```bash
 sudo dpkg -i <package name>.deb # install <package-name>.deb file 
 ```

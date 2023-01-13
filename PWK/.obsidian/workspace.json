@@ -1,19 +1,19 @@
 {
   "main": {
-    "id": "3ba48d1dca511a61",
+    "id": "585c7d7e8f300644",
     "type": "split",
     "children": [
       {
-        "id": "b83cff3b25d7cd60",
+        "id": "390acb2890c26540",
         "type": "tabs",
         "children": [
           {
-            "id": "27650948ff25068f",
+            "id": "856a6c2b675f0c60",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Getting-Comfortable-with-Kali-Linux.md",
+                "file": "Command-Line-Fun/index.md",
                 "mode": "source",
                 "source": false
               }
@@ -25,15 +25,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "4842a77bf8b85103",
+    "id": "9366d6b77c08614b",
     "type": "split",
     "children": [
       {
-        "id": "596ded507a1a2167",
+        "id": "2acf831fa4a0dda8",
         "type": "tabs",
         "children": [
           {
-            "id": "df956d2ece490ded",
+            "id": "bd20ea3f6784d6dc",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -43,7 +43,7 @@
             }
           },
           {
-            "id": "5aebee4b50c35464",
+            "id": "aab9e6f39e65a151",
             "type": "leaf",
             "state": {
               "type": "search",
@@ -58,7 +58,7 @@
             }
           },
           {
-            "id": "05ae83c66a038a5b",
+            "id": "1612818da4013efc",
             "type": "leaf",
             "state": {
               "type": "starred",
@@ -72,20 +72,20 @@
     "width": 300
   },
   "right": {
-    "id": "440a83d9146161b8",
+    "id": "b22aaa7ab4b4962f",
     "type": "split",
     "children": [
       {
-        "id": "021f7ae540df37cc",
+        "id": "7bc8eeee4fed91be",
         "type": "tabs",
         "children": [
           {
-            "id": "48960d8501027ea1",
+            "id": "faacc3692497e2bc",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Getting-Comfortable-with-Kali-Linux.md",
+                "file": "Command-Line-Fun/index.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,19 +97,19 @@
             }
           },
           {
-            "id": "f77e3d7b6149d8ec",
+            "id": "9c3b0d15a79bff69",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Getting-Comfortable-with-Kali-Linux.md",
+                "file": "Command-Line-Fun/index.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
             }
           },
           {
-            "id": "3b88ba3ca2ec8d78",
+            "id": "325369171d0a59eb",
             "type": "leaf",
             "state": {
               "type": "tag",
@@ -120,12 +120,12 @@
             }
           },
           {
-            "id": "d68d086453fd1013",
+            "id": "f8d341817fb9aa6e",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
-                "file": "Getting-Comfortable-with-Kali-Linux.md"
+                "file": "Command-Line-Fun/index.md"
               }
             }
           }
@@ -146,11 +146,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "27650948ff25068f",
+  "active": "856a6c2b675f0c60",
   "lastOpenFiles": [
-    "Command-Line-Fun.md",
-    "Getting-Comfortable-with-Kali-Linux.md",
-    "COMMAND-LINE-FUN.md",
-    "Getting Comfortable with Kali Linux.md"
+    "Getting-Comfortable-with-Kali-Linux/index.md",
+    "index.md",
+    "Command-Line-Fun/index.md"
   ]
 }

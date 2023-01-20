@@ -43,9 +43,14 @@ Desktop/
 + `CTRL + R` searchs in commands and fins suitable one
 
 ```bash
-history # Show history commands
-!<number> # Run command with the number associated
-!! # Execute last command in out terminal session (like arrow key up and enter)
+# Show history commands
+history
+
+# Run command with the number associated
+!<number> 
+
+# Execute last command in our terminal session (like arrow key up and enter)
+!!
 ```
 
 # 2 - PIPING AND REDIRECTION
@@ -57,28 +62,33 @@ history # Show history commands
 
 ## 2.1 - REDIRECTING TO A NEW FILE
 ```bash
-echo abcd > "file name" # Replace <file name> content with abcd, If the file does not exist it will be created
+# Replace <file name> content with abcd, If the file does not exist it will be created
+echo abcd > "file name"
 ```
 
 ## 2.2 -  REDIRECTING TO AN EXISTING FILE
 ```bash
-echo abcd >> "file name" # Append content to the existing file
+# Append content to the existing file
+echo abcd >> "file name"
 ```
 
 ## 2.3 -  REDIRECTING FROM A FILE
 ```bash
-wc -m < filename.txt # Counts characters in a file
+# Counts characters in a file
+wc -m < filename.txt
 ```
 
 
 ## 2.4 - REDIRECTING STDERR
 ```bash
-ls ./non_existing_file 2>error.txt # Redirect standard error of command to error.txt
+# Redirect standard error of command to error.txt
+ls ./non_existing_file 2>error.txt
 ```
 
 ## 2.5 - PIPING
 ```bash
-cat filename.txt | wc -c # Read file and pipes it to wc which counts characters of the file
+# Read file and pipes it to wc which counts characters of the file
+cat filename.txt | wc -c
 cat filename.txt | wc -c > count.txt 
 ```
 
@@ -91,15 +101,20 @@ cat filename.txt | wc -c > count.txt
 
 ```bash
 ls -la /usr/bin | grep zip # Print lines which hash zip in it
-grep -i # Case insensitive
-grep -r # Search Recursively
+
+# Case insensitive
+grep -i
+
+# Search Recursively
+grep -r
 ```
 
 ## 3.2 - SED
 + Text editing on a stream of text
 
 ```bash
-echo "Try hard" | sed 's/hard/harder' # Replace harder with harder s means replace
+# Replace harder with harder s means replace
+echo "Try hard" | sed 's/hard/harder'
 "Try harder"
 ```
 
@@ -107,7 +122,8 @@ echo "Try hard" | sed 's/hard/harder' # Replace harder with harder s means repla
 + Extract section of text and print it
 
 ```bash
-echo 'a,b,c,d' | cut -d ',' -f 2 # Split text by ',' and prints second element
+# Split text by ',' and prints second element
+echo 'a,b,c,d' | cut -d ',' -f 2 
 b
 
 cut -d ":" -f 1 /etc/passwd
@@ -119,13 +135,15 @@ cut -d ":" -f 1 /etc/passwd
 + cut only can accept one character field seperator but awk is more flexible
 
 ```bash
-echo "aaaa::bbbb::cccc" | awk -F "::" '{print $1 $3}' # -F is field seperator and print $1 $3 extract first and third field
+echo "aaaa::bbbb::cccc" | awk -F "::" '{print $1 $3}'
 aaaa cccc
+# -F is field seperator and print $1 $3 extract first and third field
 ```
 
 ## 3.5 - PRACTICAL EXAMPLES
 ```bash
-cat access.log | cut -d ' ' -f 1 | sort -u # Prints IP Addresses
+# Prints IP Addresses
+cat access.log | cut -d ' ' -f 1 | sort -u
 
 cat access.log | cut -d ' ' -f 1 | sort | uniq -c | sort -urn # Print IP Add
 
@@ -176,8 +194,11 @@ x in command mode # Delete current character
 + Compares two files and print uniq and common lines
 
 ```bash
-comm file1 file2 # Print unique lines in file1 in first collumn, uniqe lines inf file2 in second column and common files in third column
-comm -12 file1 file2 # Print common lines since we suppressed columns 1,2
+# Print unique lines in file1 in first collumn, uniqe lines inf file2 in second column and common files in third column
+comm file1 file2
+
+# Print common lines since we suppressed columns 1,2
+comm -12 file1 file2
 ```
 
 ## 5.2 - DIFF
@@ -291,7 +312,8 @@ watch -n <seconds> <command> # Runthe specified <command> in every <n> seconds
 + Downloads files using HTTP and FTP protocol
 
 ```bash
-wget -O filename <URL LINK> # Downloads file from URL and saves it in different name by -O (capital case o) option
+# Downloads file from URL and saves it in different name by -O (capital case o) option
+wget -O filename <URL LINK>
 ```
 
 ## 8.2 - CURL
@@ -299,7 +321,8 @@ wget -O filename <URL LINK> # Downloads file from URL and saves it in different 
 + Download or Upload files
 
 ```bash
-curl -o filename <URL LINK> # Downloads file from URL and saves it in different name by -o (lower case o) option
+# Downloads file from URL and saves it in different name by -o (lower case o) option
+curl -o filename <URL LINK>
 ```
 
 ## 8.3 - AXEL

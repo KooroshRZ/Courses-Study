@@ -85,9 +85,14 @@ mkdir -p test/{recon,exploit,report}
 
 ## 4-3 FINDING FILES IN KALI LINUX
 ```bash
-which filename # Searches in $PATH variable
-locate filename # Quickest wayto find file, searches in built-in DB locate.db, updatebd command updates it
-find # Most complex and flexbile tool to find files based on timestamp,name,permission,...
+# Searches in $PATH variable
+which filename
+
+# Quickest way to find file, searches in built-in DB locate.db, updatebd command updates it
+locate filename
+
+# Most complex and flexbile tool to find files based on timestamp,name,permission,...
+find
 ```
 
 # 5 - MANAGING KALI LINUX SERVICES
@@ -126,25 +131,35 @@ sudo apt update # update list of repositories
 + after updadint APT db we can use it t upgrade packages
 
 ```bash
-sudo apt upgrade <package name> # Upgrade single packege with name
-sudo apt upgrade # Upgrade entire OS but better to take snapshot before upgrading
+# Upgrade single packege with name
+sudo apt upgrade <package name>
+
+# Upgrade entire OS but better to take snapshot before upgrading
+sudo apt upgrade
 ```
 
 ## 6.3 - APT-CACHE SEARCH AND APT SHOW
 ```bash
-apt-cache search <package name> # Search for package name in cached repositories based on name and description
-apt show <package name> # Show all information about package name
+# Search for package name in cached repositories based on name and description
+apt-cache search <package name>
+
+# Show all information about package name
+apt show <package name>
 ```
 
 ## 6.4 - APT INSTALL
 ```bash
-sudo apt install <package name> # Add and install package to system
+# Add and install package to system
+sudo apt install <package name>
 ```
 
 ## 6.5 - APT REMOVE --PURGE
 ```bash
-sudo apt remove <package name> # Completely removes and all package data but leaves config files
-sudo apt remove --purge <package name> # Completely remove all package data including config files
+# Completely removes and all package data but leaves config files
+sudo apt remove <package name>
+
+# Completely remove all package data including config files
+sudo apt remove --purge <package name>
 ```
 
 ## 6.6 - DPKG
@@ -153,7 +168,8 @@ sudo apt remove --purge <package name> # Completely remove all package data incl
 + It does not install dependent packages
 
 ```bash
-sudo dpkg -i <package name>.deb # install <package-name>.deb file 
+# install <package-name>.deb file 
+sudo dpkg -i <package name>.deb
 ```
 
 # 7 -  WRAPPING UP

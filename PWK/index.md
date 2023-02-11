@@ -6,5 +6,7 @@
 
 [Module 3 - Practical Tools](Practical-Tools/)
 
+[Module 4 - Bash Scripting](Bash-Scripting/)
+
 
 

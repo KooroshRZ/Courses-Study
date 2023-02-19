@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "390acb2890c26540",
+        "id": "85291789a5b4feee",
         "type": "tabs",
         "children": [
           {
-            "id": "856a6c2b675f0c60",
+            "id": "63c4d864bc9272c2",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -146,9 +146,9 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "856a6c2b675f0c60",
+  "active": "63c4d864bc9272c2",
   "lastOpenFiles": [
-    "PWK/Bash-Scripting/images/20.png",
-    "PWK/Bash-Scripting/index.md"
+    "PWK/Bash-Scripting/index.md",
+    "PWK/Bash-Scripting/images/20.png"
   ]
 }

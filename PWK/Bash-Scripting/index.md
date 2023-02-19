@@ -199,7 +199,7 @@ echo "Thanks, your creds are as follows: " $username " and " $password
 
 ![11.png](./images/11.png)
 
-## 3 - IF, ELSE, ELIF STATEMENTS
+# 3 - IF, ELSE, ELIF STATEMENTS
 + Conditional statements allow us perform different actions based on different conditions
 + `IF` statement is relatively simple. Pay attention to the syntax specially the spaces between `[]`
 
@@ -240,3 +240,33 @@ echo "Thanks, your creds are as follows: " $username " and " $password
 + Let's run it to see the result
 
 ![21.png](./images/21.png)
+
+
+# 4 - BOOLEAN LOGICAL OPERATIONS
+
++ Boolean operators may seem a bit mysterious `&` and `|`
++ We use these operators in command line when we want to pipe `|` commands
+
+1. First of all the `&&` operator, we use it when we want to execute second command only if the first command executes successfully, Lets see it in an example
+
+![22.png](./images/22.png)
+
+2. Let's see another example with a command that returns false when executing (Here grep returns false because user2 does not exist in `/etc/passwd`)
+
+![23.png](./images/23.png)
+
+3. Let's see another example with or `||` operator, This operator is opposite of `&&` and it executes second command only if the first command fails. Here the first command failed to find user2 and instead the second command runs
+
+![24.png](./images/24.png)
+
+4. We can use this in `test` commands or conditions to use multiple commands to meet a specific condition. Let's see an example that checks two conditions and runs a third command when both commands return true:
+
+![25.png](./images/25.png)
+
+![26.png](./images/26.png)
+
+5. Let's see previous example with or `||` operator and use it in `if` statement, Here only one of them has to be true to meet the condition and enter the `if` branch
+
+![27.png](./images/27.png)
+
+![28.png](./images/28.png)

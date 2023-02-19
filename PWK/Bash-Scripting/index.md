@@ -270,3 +270,53 @@ echo "Thanks, your creds are as follows: " $username " and " $password
 ![27.png](./images/27.png)
 
 ![28.png](./images/28.png)
+
+# 5 - LOOPS
++ In programming loops are used when we want to run a command several times until a specific condition is met
++ In bash two most predominant loops commands are `for` and `while`
+
+## 5.1 - FOR LOOPS
++ This type of loop is used to perform given set of commands for each item in the loop
++ This loop grab items from list, execute command for each item and moves to the next item in the list and repeat the steps until the list is over
+
+![29.png](./images/29.png)
+
++ Lets look at an example
++ This one-liner bash command executes a `seq` command to generate numbers from 1 to 10
++ Then assign each number to `ip` variable
++ Then prints each ip address according to the numbes
+
+![30.png](./images/30.png)
+
+
++ We can rewrite this loop with Linux brace expansion
++ This syntax `{1..10}` is called sequence expression
++ We can use this for loop to generate range of IP addresses and run nmap for each of them
+
+![31.png](./images/31.png)
+
+
+## 5.1 - WHLIE LOOPS
++ This type of loop executes a set of commands while an specific expression is true
++ It use `[]` for the test command
+
+![32.png](./images/32.png)
++ Let's rewrite previous example in while loop
+
+![33.png](./images/33.png)
+
++ First we initialize a variable named `counter` with value 1
++ Then we put a condition that until the counter is less than 10 print the IP address
++ and in each step we increment the counter variable by one until it reaches 10
+
+![34.png](./images/34.png)
+
++ This is not the output we expected and we don't have IP address `10.11.1.10` here
++ This is because of a common mistake named `off-by-one`
++ It is because we used `-lt` operator that means less than 10 and it does not reach 10 itself
++ We should use less than or equal operator `-le`
++ Let's fix this with a minor change
+
+![35.png](./images/35.png)
+
+![36.png](./images/36.png)

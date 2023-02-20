@@ -320,3 +320,49 @@ echo "Thanks, your creds are as follows: " $username " and " $password
 ![35.png](./images/35.png)
 
 ![36.png](./images/36.png)
+
+# 6 - FUNCTIONS
++ Functions are piece of code that can be used multiple times without rewriting it
++ There are blocks od code and sub-routine that can be called and executed whenever needed
++ There are two different formats for them, First one id familiar to bashs scripters and the second one is familiar to `C` programmers (They are same in terms of functionality)
+
+![37.png](./images/37.png)
+
++ Let's see an example for simple functions without arguments:
+
+![38.png](./images/38.png)
+![39.png](./images/39.png)
+
++ Here is another example for function with arguments
++ arguments are not declared in parentheses and they can be used with numbers (`$1...$n`) inside function
++ Function declaration should be before functions call
+
+![40.png](./images/40.png)
+![41.png](./images/41.png)
+
++ If we want to return value in traditional programming way we can't because bash won't let us to do so
++ We can just return a status code like 0 for success and non-zero for failure and we can access it with `$?`
++ If we want to return a custom value we can use a global variable and change its value inside function
+
+![42.png](./images/42.png)
+![43.png](./images/43.png)
+
++ If we use just return keyword inside function, the last status code would be rerurned instead
+
+**Variables Scope**
++ scope of a variable means from where that variable is accessible
++ Global varialbes can be accessed from every part of the bash script
++ Local variables can just be accessed from where that varialbe is defined (It can be function or sub-shell)
++ If we want to define and use a local varialbe with same name as some global variable we can set value to it like this so we won't change global variables value
+
+```bash
+local name="Kourosh"
+```
++ Let's see an example for local and global variables
+
+![44.png](./images/44.png)
+
+![45.png](./images/45.png)
+
++ We see that changing value of a local variable with same name as a global variable will not change the global variable's value
++ We also saw that changing the value of a global value inside function will affect its value in every part of bash script 

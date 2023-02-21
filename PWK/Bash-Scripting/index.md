@@ -366,3 +366,163 @@ local name="Kourosh"
 
 + We see that changing value of a local variable with same name as a global variable will not change the global variable's value
 + We also saw that changing the value of a global value inside function will affect its value in every part of bash script 
+
+# 7 - PRACTICAL EXAMPLES
++ Here we want to do some practical examples with what we've learned so fat
+
+## 7.1 - PRACTICAL BASH USAGE – EXAMPLE 1
++ Here we want to obtains list of subdomains of `www.megacorpone.com` and their corresponding IP addresses
++ First let's use `wget` to get `index.html` of the website
+
+```bash
+wget www.megacorp.com
+```
+![46.png](./images/46.png)
+
++ Next, we will search for links inside the `index.html` webpage with `grep` command
+
+```bash
+grep "href=" index.html
+```
+![47.png](./images/47.png)
+
++ Next, we will search for `megacorpone` with `grep`
+
+```bash
+grep "href=" index.html | grep "\.megacorpone" | grep -v "www\.megacorpone\.com" | head
+```
+![48.png](./images/48.png)
+
++ Next we will split our output with `http://` and pick second element which would be the subdomain link and remaining lines data with `awk` command
+
+```bash
+grep "href=" index.html | grep "\.megacorpone" | grep -v "www\.megacorpone\.com" | awk -F "http://" 'print {$2}'
+```
+![49.png](./images/49.png)
+
++ Next we will use `cut` to split output with `/` and pick first element which would be the subdomain
+```bash
+grep "href=" index.html | grep "\.megacorpone" | grep -v "www\.megacorpone\.com" | awk -F "http://" 'print {$2}' | cut -d "/" -f 1
+```
+![50.png](./images/50.png)
+
++ We can simplify these steps with regex
+
+```bash
+grep -o "[^/]*\.megacorpone\.com" index.html | sort -u > list.txt
+# grep -o only returns strings defined in reqex
+# [^/]* means every character except /
+# \. means we wanna treat . as normal character not regex syntax
+```
+![51.png](./images/51.png)
+
++ Next we can use `host` command to resolve the subdomain and find it's IP address with a bash one-liner
+
+```bash
+for subdomain in $(cat list.txt); do host $subdomain; done
+```
+![52.png](./images/52.png)
+
++ Some subdomains may not have an IP address, for this we just grep for those which has `has address` in their output
+
+```bash
+for subdomain in $(cat list.txt); do host $subdomain; done | grep "has address" | cut -d " " -f 4 | sort -u
+# grep "hass address" searchs for lines which has ip address
+# cut -f " " -f 4 separates by " " and pick forth element which is IP address
+# sort -u sorts the results
+```
+![53.png](./images/53.png)
+
+
+## 7.2 - PRACTICAL BASH USAGE – EXAMPLE 2
++ In this example we are in the middle of penetration test and we have unprivileged acces on a windows machine
++ Consider we wanna look for an exploit which has `afd` inside it but we can not remember
++ We can use bash scripting to find it easily on exploit-db
+
+```bash
+searchsploit afd windows -w -t | grep http | cut -f 2 -d "|"
+```
+![54.png](./images/54.png)
+
++ We can use the exploits raw link to download the exploits in a for loop
+
+```bash
+for e in $(searchsploit afd windows -w -t | grep http | cut -f 2 -d "|"); do exp_name=$(echo $e | cut -d "/" -f 5) && url=$(echo $e | sed 's/exploits/raw/') && wget -q --no-check-certificate $url -O $exp_name; done
+
+# for iterates inside exploits
+# exp_name extracts the exploit name/ID from the link
+# sed replaces exploit with raw to generate raw exploit link
+# && wget downloads the exploit if the previous command exists with success
+```
+![55.png](./images/55.png)
+
++ We can make the bash one-liner clean:
+
+```bash
+#!/bin/bash 
+# Bash Script to search for a given exploit and download all matches.
+
+for e in $(searchsploit afd windows -w -t | grep http | cut -f 2 -d "|")
+
+do
+	exp_name=$(echo $e | cut -d "/" -f 5)
+	url=$(echo $e | sed 's/exploits/raw/')
+	wget -q --no-check-certificate $url -O $exp_name
+done
+```
+![56.png](./images/56.png)
+
+
+## 7.3 - PRACTICAL BASH USAGE – EXAMPLE 3
++ Let's consider we are inside a network during a penetration testing and we want to scan entire network for web servers
++ First we can start with `nmap` to find 80 open ports
+
+```bash
+sudo nmap -A -p80 --open 10.11.1.0/24 -oG nmap-scan_10.11.1.1-254 
+# -A is for aggressive mode
+# -p80 scan just for port 80
+# --open only shows open ports
+# -oG is for write output to file
+```
+![57.png](./images/57.png)
+
++ Let's now grep for port 80 and see the result
+
+```bash
+cat nmap-scan_10.11.1.1-254 | grep 80 | grep -v "Nmap"
+```
+![58.png](./images/58.png)
+
++ Let's extract just IP addresses with `awk` command, These are IP addresses inside network which their port 80 are open
+
+```bash
+cat nmap-scan_10.11.1.1-254 | grep 80 | grep -v "Nmap" | awk '{print $2}'
+```
+![59.png](./images/59.png)
+
+
++ Let's use `cutycapt` too render the webpages and take screenshots from them
+
+```bash
+for ip in $(cat nmap-scan_10.11.1.1-254 | grep 80 | grep -v "Nmap" | awk '{print $2}'); do cutycapt --url=$ip --out=$ip.png; done
+# --url specify target website
+# --out specify the output png file
+```
+![60.png](./images/60.png)
+
++ In the end let's put all these screenshots inside HTML file with `img` tag to see them all effectively 
+
+```bash
+#!/bin/bash
+# Bash Script to examine the scan results through HTML.
+
+echo "<HTML><BODY><BR>" > web.html
+
+ls -l *.png | awk -F : '{ print $1":\n<BR><IMG SRC=\""$1""$2"\" width=600><BR>"}' >> web.html
+
+echo "</BODY></HTML>" >> web.html
+```
+
+![61.png](./images/61.png)
+
+**Learning to use bash effectively allows you to do large amount of tasks and tests automatically**
